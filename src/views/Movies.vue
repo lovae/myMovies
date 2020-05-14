@@ -13,9 +13,9 @@
           <h4>{{ item.title }}</h4>
           <div class="bottom">
             <el-tag>{{ item.rate }}</el-tag>
-            <el-button type="text" class="button" @click="lookMore(item.id)"
-              >查看详情</el-button
-            >
+            <el-button type="text" class="button" @click="lookMore(item)">
+              查看详情
+            </el-button>
           </div>
         </div>
       </el-card>
@@ -23,30 +23,17 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import { mapState } from "vuex";
 export default {
-  data() {
-    return {
-      movieList: []
-    };
+  computed: {
+    ...mapState(["movieList"])
   },
   created() {
-    axios({
-      method: "get",
-      url: "/j/search_subjects",
-      params: {
-        type: "movie",
-        tag: "热门",
-        page_limit: 50,
-        page_start: 0
-      }
-    }).then(res => {
-      this.movieList = res.data.subjects;
-    });
+    this.$store.dispatch("reqMov");
   },
   methods: {
-    lookMore(id) {
-      this.$router.push(`/detail/${id}`);
+    lookMore(item) {
+      this.$router.push(`/detail/${item.id}`);
     }
   }
 };
