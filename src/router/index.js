@@ -1,8 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Movies from "../views/Movies.vue";
-import Home from "../views/Home.vue";
-import Detail from "../views/Detail.vue";
 
 Vue.use(VueRouter);
 
@@ -14,7 +11,8 @@ const routes = [
   {
     path: "/home",
     name: "home",
-    component: Home
+    // 路由懒加载，一次请求的js太大
+    component: () => import("../views/Home.vue")
   },
   {
     path: "/movies",
@@ -22,16 +20,18 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: Movies
+    component: () => import("../views/Movies.vue")
   },
   {
     path: "/detail/:id",
-    component: Detail
+    component: () => import("../views/Detail.vue")
   }
 ];
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: "history",
+  linkActiveClass: "el-button--primary"
 });
 
 export default router;

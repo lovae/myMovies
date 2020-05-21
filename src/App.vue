@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <router-link to="/home" tag="el-button" active-class="el-button--primary">
+    <router-link to="/home" tag="el-button">
       主页
     </router-link>
-    <router-link to="/movies" tag="el-button" active-class="el-button--primary">
+    <router-link to="/movies" tag="el-button">
       电影
     </router-link>
     <router-view></router-view>
