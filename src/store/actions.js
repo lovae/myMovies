@@ -1,8 +1,10 @@
-import axios from "axios";
+// import axios from "axios";
+import { request } from "../network/request";
+
 import { RES_MOV } from "./mutationsType";
 export default {
   reqMov({ commit }) {
-    axios({
+    request({
       method: "get",
       url: "/j/search_subjects",
       params: {

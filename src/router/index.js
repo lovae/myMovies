@@ -1,6 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+const Home = () => import("../views/Home.vue");
+const Movies = () => import("../views/Movies.vue");
+const Detail = () => import("../views/Detail.vue");
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -11,8 +15,7 @@ const routes = [
   {
     path: "/home",
     name: "home",
-    // 路由懒加载，一次请求的js太大
-    component: () => import("../views/Home.vue")
+    component: Home
   },
   {
     path: "/movies",
@@ -20,11 +23,12 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import("../views/Movies.vue")
+    // 懒加载，防止最后打包的js文件过大，有利于首次请求
+    component: Movies
   },
   {
     path: "/detail/:id",
-    component: () => import("../views/Detail.vue")
+    component: Detail
   }
 ];
 
