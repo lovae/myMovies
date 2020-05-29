@@ -19,5 +19,6 @@ export const request = config => {
         reject(err);
       });
   });
+  
    */
 };
